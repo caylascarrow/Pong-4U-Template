@@ -1,7 +1,7 @@
 ﻿/*
  * Description:     A basic PONG simulator
- * Author:           
- * Date:            
+ * Author:     Cayla Scarrow
+ * Date:     February 2016
  */
 
 #region libraries
@@ -142,20 +142,42 @@ namespace Pong
             newGameOk = true;
             SetParameters();
 
-            // TODO create code to make a graphics object, a brush, and a font to display the countdown
+            // create code to make a graphics object, a brush, and a font to display the countdown
+            Graphics g = this.CreateGraphics();
+            SolidBrush textBrush = new SolidBrush(Color.White);
+            Font countDownFont = new Font("Courier New", 50, FontStyle.Regular);
 
             startLabel.Visible = false;
             Refresh();
             
             //countdown to start of game
-            for (; ; ) // TODO create conditions for a for loop that counts down from 3 
+            for (int i = 3; i > 0; i--) // create conditions for a for loop that counts down from 3 
             {
-                // --- create code using DrawString to display the countdown in the appropriate area.  
+                // --- create code using DrawString to display the countdown in the appropriate area. 
+
+                if (i == 3)
+                {
+                    g.DrawString("3", countDownFont, textBrush, this.Width / 2 - 35, this.Height / 2);
+                }
+                else if (i == 2)
+                {
+                    g.DrawString("2", countDownFont, textBrush, this.Width / 2 - 35, this.Height / 2);
+                }
+                else
+                {
+                    g.DrawString("1", countDownFont, textBrush, this.Width / 2 - 35, this.Height / 2);
+                }
+
                 // --- sleep for 1 second
+                Thread.Sleep(1000);
+
                 // --- refresh the screen
+                this.Refresh();
             }
-            
-            // TODO start the gameUpdateLoop timer
+
+            // start the gameUpdateLoop timer
+            gameUpdateLoop.Enabled = true;
+
             newGameOk = false;
         }
 
@@ -179,8 +201,11 @@ namespace Pong
 
             }
 
-            // TODO set starting X position for ball to middle of screen, (use this.Width and BALL_SIZE)
-            // TODO set starting Y position for ball to middle of screen, (use this.Height and BALL_SIZE)
+            // set starting X position for ball to middle of screen, (use this.Width and BALL_SIZE)
+            ballX = (this.Width / 2) - (BALL_SIZE / 2);
+
+            // set starting Y position for ball to middle of screen, (use this.Height and BALL_SIZE)
+            ballY = (this.Height / 2) - (BALL_SIZE / 2);
 
         }
 
@@ -197,6 +222,7 @@ namespace Pong
             #region update ball position
 
             // TODO create code to move ball either left or right based on ballMoveRight and BALL_SPEED
+            //ballMoveRight = 
 
             // TODO create code move ball either down or up based on ballMoveDown and BALL_SPEED
 
@@ -292,10 +318,12 @@ namespace Pong
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            // TODO draw paddles using FillRectangle
+            // draw paddles using FillRectangle
+            e.Graphics.FillRectangle(drawBrush, PADDLE_EDGE, paddle1Y, PADDLE_WIDTH, PADDLE_LENGTH);
+            e.Graphics.FillRectangle(drawBrush, (this.Width - (PADDLE_EDGE + PADDLE_WIDTH)), paddle2Y, PADDLE_WIDTH, PADDLE_LENGTH);
 
-
-            // TODO draw ball using FillRectangle
+            // draw ball using FillRectangle
+            e.Graphics.FillRectangle(drawBrush, ballX, ballY, BALL_SIZE, BALL_SIZE);
 
         }
 
