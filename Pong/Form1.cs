@@ -221,25 +221,49 @@ namespace Pong
 
             #region update ball position
 
-            // TODO create code to move ball either left or right based on ballMoveRight and BALL_SPEED
-            //ballMoveRight = 
-
-            // TODO create code move ball either down or up based on ballMoveDown and BALL_SPEED
-
+            // create code to move ball either left or right based on ballMoveRight and BALL_SPEED
+            if (ballMoveRight == true)
+            {
+                ballX = ballX + BALL_SPEED;
+            }
+            else
+            {
+                ballX = ballX - BALL_SPEED;
+            }
+            // create code move ball either down or up based on ballMoveDown and BALL_SPEED
+            if(ballMoveDown == true)
+            {
+                ballY = ballY + BALL_SPEED;
+            }
+            else
+            {
+                ballY = ballY - BALL_SPEED;
+            }
             #endregion
 
             #region update paddle positions
 
             if (aKeyDown == true && paddle1Y > 0)
             {
-                // TODO create code to move player 1 paddle up using paddle1Y and PADDLE_SPEED
+                // create code to move player 1 paddle up using paddle1Y and PADDLE_SPEED
+                paddle1Y = paddle1Y - PADDLE_SPEED;
+            }
+            if (zKeyDown == true && paddle1Y < (this.Height - PADDLE_LENGTH ))
+            {
+                //create an if statement and code to move player 1 paddle down using paddle1Y and PADDLE_SPEED
+                paddle1Y = paddle1Y + PADDLE_SPEED;
+            }
+            if (jKeyDown == true && paddle2Y > 0)
+            {
+                //create an if statement and code to move player 2 paddle up using paddle2Y and PADDLE_SPEED
+                paddle2Y = paddle2Y - PADDLE_SPEED;
+            }
+            if (mKeyDown == true && paddle2Y < (this.Height - PADDLE_LENGTH))
+            {
+                //create an if statement and code to move player 2 paddle down using paddle2Y and PADDLE_SPEED
+                paddle2Y = paddle2Y + PADDLE_SPEED;
             }
 
-            // TODO create an if statement and code to move player 1 paddle down using paddle1Y and PADDLE_SPEED
-
-            // TODO create an if statement and code to move player 2 paddle up using paddle2Y and PADDLE_SPEED
-
-            // TODO create an if statement and code to move player 2 paddle down using paddle2Y and PADDLE_SPEED
 
             #endregion
 
@@ -247,11 +271,18 @@ namespace Pong
 
             if (ballY < 0) // if ball hits top line
             {
-                // TODO use ballMoveDown boolean to change direction
+                //TODO use ballMoveDown boolean to change direction
+                ballMoveDown = true;
                 // TODO play a collision sound
             }
-            // TODO In an else if statement use ballY, this.Height, and BALL_SIZE to check for collision with bottom line
-            // If true use ballMoveDown down boolean to change direction
+           
+            if (ballY < (this.Height - BALL_SIZE))// if ball hits bottom line
+            {
+                // TODO use ballMoveDown down boolean to change direction
+                ballMoveDown = false;
+                // TODO play a collision sound
+            }
+
 
             #endregion
 
@@ -261,11 +292,13 @@ namespace Pong
             {
                 // TODO play a "paddle hit" sound 
                 // TODO use ballMoveRight boolean to change direction
+                ballMoveRight = true;
             }
             else if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_LENGTH && ballX + BALL_SIZE > this.Width - PADDLE_EDGE - PADDLE_WIDTH / 2) // right paddle collision
             {
                 // TODO play a "paddle hit" sound 
                 // TODO use ballMoveRight boolean to change direction
+                ballMoveRight = false;
             }
 
             #endregion
@@ -278,8 +311,11 @@ namespace Pong
             {
                 // --- play score sound
                 // --- update player 2 score
+                player2Score = player2Score + 1;
                 // --- update player2Label with new score
+                player2Label.Text = player2Score + "";
                 // --- refresh
+                
 
                 // --- use if statement to check to see if player 2 has won the game. If true run 
                 // gameWinScore method. Else call SetParameters method to reset ball position.
