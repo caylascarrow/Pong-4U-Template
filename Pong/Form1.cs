@@ -42,7 +42,7 @@ namespace Pong
         const int PADDLE_LENGTH = 40;
         const int PADDLE_WIDTH = 10;
         const int PADDLE_EDGE = 20;  // buffer distance between screen edge and paddle
-        const int PADDLE_SPEED = 4;
+        const int PADDLE_SPEED = 5;
 
         //constants used to set size and speed of ball 
         const int BALL_SIZE = 10;
@@ -56,7 +56,7 @@ namespace Pong
         Boolean aKeyDown, zKeyDown, jKeyDown, mKeyDown;
 
         //game winning score
-        int gameWinScore = 2;
+        int gameWinScore = 10;
 
         //brush for paint method
         SolidBrush drawBrush = new SolidBrush(Color.White);
