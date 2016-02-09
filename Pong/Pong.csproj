@@ -84,8 +84,8 @@
     <Content Include="ramlogo.ico" />
     <None Include="Resources\collision.wav" />
     <None Include="Resources\score.wav" />
-    <None Include="Resources\wall bounce.wav" />
-    <None Include="Resources\paddle hit.wav" />
+    <None Include="Resources\wallBounce.wav" />
+    <None Include="Resources\paddleHit.wav" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WMPLib">
